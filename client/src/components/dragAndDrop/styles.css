@@ -1,0 +1,23 @@
+.drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .dragging {
+    border-color: #007bff;
+  }
+  
+
+  .video-preview {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .video-preview video {
+    width: 100%;
+    display: block;
+  }
+  

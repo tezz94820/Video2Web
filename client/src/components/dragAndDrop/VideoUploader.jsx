@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './styles.css';
 const VideoUploader = () => {
   const [dragging, setDragging] = useState(false);
   const [videoPreview, setVideoPreview] = useState(null);

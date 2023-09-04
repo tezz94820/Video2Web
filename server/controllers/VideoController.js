@@ -5,11 +5,21 @@ const ffmpegPath = require('ffmpeg-static');
 const fs = require('fs').promises; // Using promises API for fs
 const cloudinary = require('../utils/cloudinary');
 const path = require('path');
+const User = require('../models/User.js');
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 const videoUploader = catchAsync(async (req, res, next) => {
   try {
+    if(!req.file){
+      return sendError(res,400,'Video Not Found',null);
+    }
+    const {username} = req.body;
+    if(!username){
+      return sendError(res,400,'Username not found',null);
+    }
+    console.log(username)
+    console.log("Video Uploaded Successfully");
     const videoPath = req.file.path;
     const outputFolder = path.basename(videoPath, path.extname(videoPath));
     const outputDir = path.join('public/images', outputFolder);
@@ -42,8 +52,9 @@ const videoUploader = catchAsync(async (req, res, next) => {
         console.error('Error uploading image:', error);
       }
     }));
+    console.log("Images Uploaded Successfully");
 
-    await fs.rm(outputDir, { recursive: true });
+    // await fs.rm(outputDir, { recursive: true });
 
     sendSuccess(res, 200, 'Video uploaded successfully at ' + outputFolder, null);
   } catch (error) {
@@ -51,5 +62,9 @@ const videoUploader = catchAsync(async (req, res, next) => {
     sendError(res, 500, 'An error occurred', error);
   }
 });
+
+
+
+
 
 module.exports = { videoUploader };

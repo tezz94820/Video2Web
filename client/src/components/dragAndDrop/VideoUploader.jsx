@@ -3,6 +3,7 @@ import './styles.css';
 const VideoUploader = () => {
   const [dragging, setDragging] = useState(false);
   const [videoPreview, setVideoPreview] = useState(null);
+  
 
   const handleDragOver = (e) => {
     e.preventDefault();
